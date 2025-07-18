@@ -1,0 +1,32 @@
+.text-message-node{
+	display: flex;
+	flex-direction: column;
+	width: 20rem;
+	box-shadow: 0 3px 10px rgb(0, 0, 0, 0.4);
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+.text-message-node > section, .text-message-node p{
+	padding: 0.5rem;
+}
+
+.text-message-node > section:first-child{
+	background-color: #8bc4c9;
+	font-weight: bold;
+}
+
+.react-flow__handle { 
+	--size: 0.25rem;
+	border-radius: 0;
+	border: 0;
+	background-color: #333333;
+	padding: var(--size);
+	border-radius: 5rem;
+}
+
+.message-body{
+	word-wrap: break-word;
+	height: 100%;
+	max-width: 20rem;
+}
