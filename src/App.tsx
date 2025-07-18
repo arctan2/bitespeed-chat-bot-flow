@@ -192,6 +192,8 @@ function App() {
 
 		if (forests.length > 1) {
 			setShowError(true);
+		} else {
+			alert("Flow saved successfully!");
 		}
 	}
 

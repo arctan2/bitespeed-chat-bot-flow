@@ -18,3 +18,20 @@
 	color: #7a66b6;
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
+.selected-node img{
+	filter: invert(59%) sepia(9%) saturate(2826%) hue-rotate(213deg) brightness(73%) contrast(95%);
+}
+
+.icon{
+	width: 1.5rem;
+	height: 1.5rem;
+	margin-bottom: 1rem;
+}
+
+.icon img{
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
