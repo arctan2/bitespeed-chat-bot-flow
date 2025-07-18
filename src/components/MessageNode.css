@@ -12,7 +12,7 @@
 }
 
 .text-message-node > section:first-child{
-	background-color: #8bc4c9;
+	background-color: #b1f4e4;
 	font-weight: bold;
 }
 
@@ -20,7 +20,7 @@
 	--size: 0.25rem;
 	border-radius: 0;
 	border: 0;
-	background-color: #333333;
+	background-color: #525252;
 	padding: var(--size);
 	border-radius: 5rem;
 }

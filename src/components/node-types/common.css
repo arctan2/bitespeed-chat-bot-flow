@@ -14,7 +14,7 @@
 }
 
 .selected-node{
-	border: 2px solid purple;
-	color: purple;
+	border: 2px solid #7a66b6;
+	color: #7a66b6;
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }

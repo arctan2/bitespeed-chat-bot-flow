@@ -1,11 +1,10 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { ReactFlow, applyNodeChanges, applyEdgeChanges, addEdge, type Edge, useReactFlow, MarkerType, type OnConnectStartParams } from '@xyflow/react';
+import { ReactFlow, applyNodeChanges, applyEdgeChanges, type Edge, useReactFlow, MarkerType, type OnConnectStartParams } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import './App.css';
 import { FlowNodeTypes, NodeTypesIconMap, Sections, type FlowNodeTyped, type NodeTypeValue, type SectionsValue } from './types';
 import NodeTypesPanel from './components/panels/NodeTypesPanel';
 import MessagePanel from './components/panels/MessagePanel';
-
 
 const initialNodes: FlowNodeTyped[] = [];
 
@@ -53,7 +52,7 @@ function App() {
 	}, []);
 
 	const onNodeClick = (e: any, node: FlowNodeTyped) => {
-		if(curNodeType !== null) {
+		if (curNodeType !== null) {
 			onContentClick(e);
 			return;
 		}
@@ -69,7 +68,7 @@ function App() {
 				if (n.id === node.id) {
 					return {
 						...n,
-						style: { outline: "2px solid purple", borderRadius: 6 }
+						style: { outline: "2px solid #7a66b6", borderRadius: 6 }
 					}
 				}
 
@@ -98,7 +97,7 @@ function App() {
 	}
 
 	const onPaneClick = (e: any) => {
-		if(curNodeType !== null) {
+		if (curNodeType !== null) {
 			onContentClick(e);
 			return;
 		}
@@ -106,10 +105,10 @@ function App() {
 	}
 
 	const onContentClick = (e: any) => {
-		if(curNodeType === null) return;
+		if (curNodeType === null) return;
 
 		const iconDiv = iconRef.current;
-		if(iconDiv === null) return;
+		if (iconDiv === null) return;
 
 		const { width, height } = getComputedStyle(iconDiv);
 
@@ -136,7 +135,7 @@ function App() {
 
 		const customEdge = {
 			...params,
-			id: `${id}-${params.target}`,
+			id: `${id}|${params.target}`,
 		};
 
 		setEdges((edgesSnapshot) => {
@@ -145,18 +144,55 @@ function App() {
 	}
 
 	const onConnectStart = (_: any, node: OnConnectStartParams) => {
-		if(node.handleType === "target") return;
+		if (node.handleType === "target") return;
 
 		const id = `edge-${node.nodeId}`;
 		const out = edges.find(e => e.id.startsWith(id));
 
-		if(out) {
+		if (out) {
 			setEdges(edges.filter(n => n !== out));
 		}
 	}
 
 	const onSaveChanges = () => {
-		setShowError(true);
+		setShowError(false);
+
+		if (nodes.length === 0) return;
+
+		const graph = new Map();
+
+		nodes.forEach((node) => graph.set(node.id, []));
+		edges.forEach(({ source, target }) => {
+			graph.get(source)?.push(target);
+			graph.get(target)?.push(source);
+		});
+
+		const visited = new Set();
+		const forests = [];
+
+		for (const node of nodes) {
+			if(visited.has(node.id)) continue;
+
+			const queue = [node.id];
+			const forest = [];
+
+			while (queue.length > 0) {
+				const curr = queue.shift();
+				if (!visited.has(curr)) {
+					visited.add(curr);
+					forest.push(curr);
+					for (const neighbor of graph.get(curr) || []) {
+						if (!visited.has(neighbor)) queue.push(neighbor);
+					}
+				}
+			}
+
+			forests.push(forest);
+		}
+
+		if (forests.length > 1) {
+			setShowError(true);
+		}
 	}
 
 	return (
