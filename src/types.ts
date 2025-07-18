@@ -1,5 +1,6 @@
 import MessageNode from "./components/MessageNode";
 import { type Node as FlowNode } from "@xyflow/react";
+import MessageIcon from "./components/node-types/MessageIcon";
 
 export const NodeTypes = {
 	Message: "Message"
@@ -21,4 +22,8 @@ export const Sections = {
 
 export type SectionsKey = keyof typeof Sections;
 export type SectionsValue = typeof Sections[SectionsKey];
+
+export const NodeTypesIconMap = {
+	[NodeTypes.Message]: MessageIcon
+}
 

@@ -26,6 +26,7 @@
 }
 
 .message-body{
+	white-space: pre-line;
 	word-wrap: break-word;
 	height: 100%;
 	max-width: 20rem;

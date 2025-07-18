@@ -5,23 +5,3 @@
 	padding: 0.5rem;
 }
 
-.nodes-list > div{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-	border-radius: 6px;
-	width: 8rem;
-	height: 5rem;
-	padding: 1rem;
-	border: 2px solid grey;
-	user-select: none;
-	font-weight: bold;
-}
-
-.nodes-list > .selected-node{
-	border: 2px solid purple;
-	color: purple;
-	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
